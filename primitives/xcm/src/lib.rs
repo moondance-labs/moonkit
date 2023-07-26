@@ -1,3 +1,4 @@
+#![cfg_attr(not(feature = "std"), no_std)]
 // Copyright Moonsong Labs
 // This file is part of Moonkit.
 
