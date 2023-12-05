@@ -55,7 +55,7 @@ impl<
 
 		let slot = u64::from(slot);
 
-		// Calculate the current relay slot in millis.
+/* 		// Calculate the current relay slot in millis.
 		let relay_chain_timestamp =
 			u64::from(RELAY_CHAIN_SLOT_DURATION_MILLIS).saturating_mul(*relay_chain_slot);
 
@@ -73,7 +73,7 @@ impl<
 				para_slot_from_relay,
 				"slot number mismatch"
 			);
-		}
+		} */
 
 		if authored > velocity + 1 {
 			panic!("authored blocks limit is reached for the slot")
