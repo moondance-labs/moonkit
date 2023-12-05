@@ -49,8 +49,9 @@ impl<
 			.read_slot()
 			.expect("failed to read relay chain slot");
 
-		let (slot, authored) = pallet::Pallet::<T>::get_highest_slot_info()
-			.expect("slot info is inserted on block initialization");
+		// Since the slot is populated on an inherent, it can happen that is not present in the first block
+		// in that case take default
+		let (slot, authored) = pallet::Pallet::<T>::get_highest_slot_info().unwrap_or_default();
 
 		let slot = u64::from(slot);
 
@@ -65,11 +66,14 @@ impl<
 			Slot::from_timestamp(relay_chain_timestamp.into(), para_slot_duration);
 
 		// Check that the slot fetched from storage is the same as the calculated using relay timestamp
-		assert_eq!(
-			Slot::from(slot),
-			para_slot_from_relay,
-			"slot number mismatch"
-		);
+		// Only check this if the slot is non-zero
+		if slot != 0u64 {
+			assert_eq!(
+				Slot::from(slot),
+				para_slot_from_relay,
+				"slot number mismatch"
+			);
+		}
 
 		if authored > velocity + 1 {
 			panic!("authored blocks limit is reached for the slot")
