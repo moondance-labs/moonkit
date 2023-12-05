@@ -6646,7 +6646,6 @@ dependencies = [
 name = "pallet-author-slot-filter"
 version = "0.9.0"
 dependencies = [
- "cumulus-pallet-parachain-system",
  "frame-benchmarking",
  "frame-support",
  "frame-support-test",
