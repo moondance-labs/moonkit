@@ -300,6 +300,7 @@ where
 			})),
 			warp_sync_params: None,
 			net_config,
+			block_relay: None,
 		})?;
 
 	let rpc_extensions_builder = {
@@ -499,6 +500,7 @@ pub fn start_instant_seal_node(config: Configuration) -> Result<TaskManager, sc_
 			block_announce_validator_builder: None,
 			warp_sync_params: None,
 			net_config,
+			block_relay: None,
 		})?;
 
 	if config.offchain_worker.enabled {
@@ -608,6 +610,7 @@ pub fn start_instant_seal_node(config: Configuration) -> Result<TaskManager, sc_
 						),
 						raw_downward_messages: downward_xcm_receiver.drain().collect(),
 						raw_horizontal_messages: hrmp_xcm_receiver.drain().collect(),
+						additional_key_values: None
 					};
 
 					Ok((time, mocked_parachain))
