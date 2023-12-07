@@ -6,7 +6,7 @@ members = [
 	"precompiles/batch",
 	"precompiles/call-permit",
 	"precompiles/xcm-utils",
-	"primitives/nimbus-primitives",
+	"primitives/*",
 	"template/node",
 	"template/runtime",
 	"template/pallets/template",
@@ -211,6 +211,7 @@ pallet-evm-precompile-balances-erc20 = { path = "precompiles/balances-erc20", de
 pallet-evm-precompile-batch = { path = "precompiles/batch", default-features = false }
 pallet-evm-precompile-call-permit = { path = "precompiles/call-permit", default-features = false }
 pallet-evm-precompile-xcm-utils = { path = "precompiles/xcm-utils", default-features = false }
+async-backing-primitives = { path = "primitives/async-backing", default-features = false }
 pallet-author-inherent = { path = "pallets/author-inherent", default-features = false }
 pallet-author-mapping = { path = "pallets/author-mapping", default-features = false }
 pallet-author-slot-filter = { path = "pallets/author-slot-filter", default-features = false }
