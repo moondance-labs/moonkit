@@ -208,15 +208,15 @@ precompile-utils = { git = "https://github.com/moondance-labs/frontier", branch 
 evm = { git = "https://github.com/rust-blockchain/evm", rev = "b7b82c7e1fc57b7449d6dfa6826600de37cc1e65", default-features = false }
 
 # Local (wasm)
-pallet-evm-precompile-balances-erc20 = { path = "precompiles/balances-erc20", default-features = false }
-pallet-evm-precompile-batch = { path = "precompiles/batch", default-features = false }
-pallet-evm-precompile-call-permit = { path = "precompiles/call-permit", default-features = false }
-pallet-evm-precompile-xcm-utils = { path = "precompiles/xcm-utils", default-features = false }
 async-backing-primitives = { path = "primitives/async-backing", default-features = false }
 pallet-author-inherent = { path = "pallets/author-inherent", default-features = false }
 pallet-author-mapping = { path = "pallets/author-mapping", default-features = false }
 pallet-author-slot-filter = { path = "pallets/author-slot-filter", default-features = false }
 pallet-async-backing = { path = "pallets/async-backing", default-features = false }
+pallet-evm-precompile-balances-erc20 = { path = "precompiles/balances-erc20", default-features = false }
+pallet-evm-precompile-batch = { path = "precompiles/batch", default-features = false }
+pallet-evm-precompile-call-permit = { path = "precompiles/call-permit", default-features = false }
+pallet-evm-precompile-xcm-utils = { path = "precompiles/xcm-utils", default-features = false }
 pallet-maintenance_mode = { path = "pallets/maintenance_mode", default-features = false }
 pallet-migrations = { path = "pallets/migrations", default-features = false }
 nimbus-primitives = { path = "primitives/nimbus-primitives", default-features = false }
