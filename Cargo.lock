@@ -7489,6 +7489,7 @@ dependencies = [
 name = "pallet-relay-storage-roots"
 version = "0.1.0"
 dependencies = [
+ "cumulus-pallet-parachain-system",
  "cumulus-primitives-core",
  "derive_more",
  "environmental",

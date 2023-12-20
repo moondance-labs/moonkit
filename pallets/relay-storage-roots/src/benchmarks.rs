@@ -17,27 +17,20 @@
 #![cfg(feature = "runtime-benchmarks")]
 
 //! Benchmarking
-use crate::{
-	Call, Config, InherentIncluded, Pallet, PersistedValidationData, RelayStorageRoot,
-	RelayStorageRootKeys,
-};
+use crate::{Config, Pallet, RelayStorageRoot, RelayStorageRootKeys};
+use cumulus_pallet_parachain_system::{RelayChainState, RelaychainStateProvider};
 use frame_benchmarking::{benchmarks, impl_benchmark_test_suite};
-use frame_support::{assert_ok, traits::Get};
-use frame_system::RawOrigin;
+use frame_support::traits::Get;
 use sp_core::H256;
 
 fn fill_relay_storage_roots<T: Config>() {
 	for i in 0..T::MaxStorageRoots::get() {
-		let relay_parent_number = i;
-		let relay_parent_storage_root = H256::default();
-		let validation_data: PersistedValidationData = PersistedValidationData {
-			relay_parent_number,
-			relay_parent_storage_root,
-			..Default::default()
+		let relay_state = RelayChainState {
+			number: i,
+			state_root: H256::default(),
 		};
-
-		frame_support::storage::unhashed::put(b"MOCK_PERSISTED_VALIDATION_DATA", &validation_data);
-		assert_ok!(Pallet::<T>::set_relay_storage_root(RawOrigin::None.into()));
+		T::RelaychainStateProvider::set_current_relay_chain_state(relay_state);
+		Pallet::<T>::set_relay_storage_root();
 	}
 
 	assert!(
@@ -50,25 +43,23 @@ benchmarks! {
 	set_relay_storage_root {
 		// Worst case is when `RelayStorageRoot` has len of `MaxStorageRoots`
 		fill_relay_storage_roots::<T>();
-
-		let relay_parent_number = 1000;
-		let relay_parent_storage_root = H256::default();
-		let validation_data: PersistedValidationData = PersistedValidationData {
-			relay_parent_number,
-			relay_parent_storage_root,
-			..Default::default()
+		let relay_state = RelayChainState {
+			number: 1000,
+			state_root: H256::default(),
 		};
-		frame_support::storage::unhashed::put(b"MOCK_PERSISTED_VALIDATION_DATA", &validation_data);
-	}: _(RawOrigin::None)
+
+		T::RelaychainStateProvider::set_current_relay_chain_state(relay_state.clone());
+	}: {
+		Pallet::<T>::set_relay_storage_root()
+	}
 	verify {
 		// verify randomness result
 		assert_eq!(
 			RelayStorageRoot::<T>::get(
-				relay_parent_number
+				relay_state.number
 			),
-			Some(relay_parent_storage_root)
+			Some(relay_state.state_root)
 		);
-		assert!(InherentIncluded::<T>::get().is_some());
 	}
 }
 

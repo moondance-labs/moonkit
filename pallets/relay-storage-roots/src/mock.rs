@@ -17,10 +17,8 @@
 //! A minimal runtime including the pallet-relay-storage-roots pallet
 use super::*;
 use crate as pallet_relay_storage_roots;
-use frame_support::{
-	assert_ok, construct_runtime, parameter_types, traits::Everything, weights::Weight,
-};
-use frame_system::RawOrigin;
+use cumulus_pallet_parachain_system::{RelayChainState, RelaychainStateProvider};
+use frame_support::{construct_runtime, parameter_types, traits::Everything, weights::Weight};
 use nimbus_primitives::NimbusId;
 use sp_core::{H160, H256};
 use sp_runtime::{
@@ -40,7 +38,7 @@ construct_runtime!(
 	{
 		System: frame_system::{Pallet, Call, Config<T>, Storage, Event<T>},
 		Balances: pallet_balances::{Pallet, Call, Storage, Config<T>, Event<T>},
-		RelayStorageRoots: pallet_relay_storage_roots::{Pallet, Call, Storage, Event<T>, Inherent},
+		RelayStorageRoots: pallet_relay_storage_roots::{Pallet, Storage},
 	}
 );
 
@@ -99,34 +97,28 @@ impl pallet_balances::Config for Test {
 
 pub struct PersistedValidationDataGetter;
 
-impl Get<PersistedValidationData> for PersistedValidationDataGetter {
-	fn get() -> PersistedValidationData {
+impl RelaychainStateProvider for PersistedValidationDataGetter {
+	fn current_relay_chain_state() -> RelayChainState {
 		frame_support::storage::unhashed::get(b"MOCK_PERSISTED_VALIDATION_DATA").unwrap()
 	}
+
+	#[cfg(feature = "runtime-benchmarks")]
+	fn set_current_relay_chain_state(state: RelayChainState) {
+		frame_support::storage::unhashed::put(b"MOCK_PERSISTED_VALIDATION_DATA", &state);
+	}
+}
+
+pub fn set_current_relay_chain_state(state: RelayChainState) {
+	frame_support::storage::unhashed::put(b"MOCK_PERSISTED_VALIDATION_DATA", &state);
 }
 
 parameter_types! {
 	pub const MaxStorageRoots: u32 = 4;
 }
 impl Config for Test {
-	type RuntimeEvent = RuntimeEvent;
-	type GetPersistedValidationData = PersistedValidationDataGetter;
+	type RelaychainStateProvider = PersistedValidationDataGetter;
 	type MaxStorageRoots = MaxStorageRoots;
 	type WeightInfo = pallet_relay_storage_roots::weights::SubstrateWeight<Test>;
-}
-
-pub(crate) fn events() -> Vec<pallet::Event<Test>> {
-	System::events()
-		.into_iter()
-		.map(|r| r.event)
-		.filter_map(|e| {
-			if let RuntimeEvent::RelayStorageRoots(inner) = e {
-				Some(inner)
-			} else {
-				None
-			}
-		})
-		.collect::<Vec<_>>()
 }
 
 /// Panics if an event is not found in the system log of events
@@ -195,20 +187,16 @@ impl ExtBuilder {
 }
 
 pub const ALICE: H160 = H160::repeat_byte(0xAA);
-pub const BOB: H160 = H160::repeat_byte(0xBB);
+//pub const BOB: H160 = H160::repeat_byte(0xBB);
 
 pub fn fill_relay_storage_roots<T: Config>() {
 	for i in 0..T::MaxStorageRoots::get() {
-		let relay_parent_number = i;
-		let relay_parent_storage_root = H256::default();
-		let validation_data: PersistedValidationData = PersistedValidationData {
-			relay_parent_number,
-			relay_parent_storage_root,
-			..Default::default()
+		let relay_state = RelayChainState {
+			number: i,
+			state_root: H256::default(),
 		};
-
-		frame_support::storage::unhashed::put(b"MOCK_PERSISTED_VALIDATION_DATA", &validation_data);
-		assert_ok!(Pallet::<T>::set_relay_storage_root(RawOrigin::None.into()));
+		set_current_relay_chain_state(relay_state);
+		Pallet::<T>::set_relay_storage_root();
 	}
 
 	assert!(

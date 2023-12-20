@@ -6,6 +6,7 @@ edition = "2021"
 version = "0.1.0"
 
 [dependencies]
+cumulus-pallet-parachain-system = { workspace = true }
 cumulus-primitives-core = { workspace = true }
 frame-support = { workspace = true }
 frame-system = { workspace = true }
@@ -33,6 +34,7 @@ pallet-balances = { workspace = true, features = [ "std", "insecure_zero_ed" ] }
 [features]
 default = [ "std" ]
 std = [
+	"cumulus-pallet-parachain-system/std",
 	"cumulus-primitives-core/std",
 	"environmental/std",
 	"frame-benchmarking/std",
@@ -49,6 +51,7 @@ std = [
 	"sp-std/std",
 ]
 runtime-benchmarks = [
+	"cumulus-pallet-parachain-system/runtime-benchmarks",
 	"frame-benchmarking",
 ]
 try-runtime = [ "frame-support/try-runtime" ]

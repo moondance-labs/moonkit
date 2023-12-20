@@ -15,16 +15,7 @@
 // along with Moonkit.  If not, see <http://www.gnu.org/licenses/>.
 use crate::mock::*;
 use crate::*;
-use frame_support::assert_ok;
-use frame_system::RawOrigin;
-
-#[test]
-fn set_relay_storage_root_is_mandatory() {
-	use frame_support::dispatch::{DispatchClass, GetDispatchInfo};
-
-	let info = crate::Call::<Test>::set_relay_storage_root {}.get_dispatch_info();
-	assert_eq!(info.class, DispatchClass::Mandatory);
-}
+use cumulus_pallet_parachain_system::RelayChainState;
 
 #[test]
 fn can_call_inherent_twice_with_same_relay_block() {
@@ -32,24 +23,13 @@ fn can_call_inherent_twice_with_same_relay_block() {
 		.with_balances(vec![(ALICE, 15)])
 		.build()
 		.execute_with(|| {
-			let relay_parent_number = 1;
-			let relay_parent_storage_root = H256::default();
-			let validation_data: PersistedValidationData = PersistedValidationData {
-				relay_parent_number,
-				relay_parent_storage_root,
-				..Default::default()
+			let relay_state = RelayChainState {
+				number: 1,
+				state_root: H256::default(),
 			};
-
-			frame_support::storage::unhashed::put(
-				b"MOCK_PERSISTED_VALIDATION_DATA",
-				&validation_data,
-			);
-			assert_ok!(Pallet::<Test>::set_relay_storage_root(
-				RawOrigin::None.into()
-			));
-			assert_ok!(Pallet::<Test>::set_relay_storage_root(
-				RawOrigin::None.into()
-			));
+			set_current_relay_chain_state(relay_state);
+			Pallet::<Test>::set_relay_storage_root();
+			Pallet::<Test>::set_relay_storage_root();
 
 			// Only the first item has been inserted
 			assert_eq!(
@@ -74,20 +54,12 @@ fn oldest_items_are_removed_first() {
 			assert_eq!(keys[0], 0);
 			assert!(RelayStorageRoot::<Test>::get(0).is_some());
 
-			let relay_parent_number = 1000;
-			let relay_parent_storage_root = H256::default();
-			let validation_data: PersistedValidationData = PersistedValidationData {
-				relay_parent_number,
-				relay_parent_storage_root,
-				..Default::default()
+			let relay_state = RelayChainState {
+				number: 1000,
+				state_root: H256::default(),
 			};
-			frame_support::storage::unhashed::put(
-				b"MOCK_PERSISTED_VALIDATION_DATA",
-				&validation_data,
-			);
-			assert_ok!(Pallet::<Test>::set_relay_storage_root(
-				RawOrigin::None.into()
-			));
+			set_current_relay_chain_state(relay_state);
+			Pallet::<Test>::set_relay_storage_root();
 
 			// Only the first item has been removed
 			let keys = RelayStorageRootKeys::<Test>::get();
