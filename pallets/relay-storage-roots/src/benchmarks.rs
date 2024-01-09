@@ -53,7 +53,6 @@ benchmarks! {
 		Pallet::<T>::set_relay_storage_root()
 	}
 	verify {
-		// verify randomness result
 		assert_eq!(
 			RelayStorageRoot::<T>::get(
 				relay_state.number

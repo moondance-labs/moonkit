@@ -187,7 +187,6 @@ impl ExtBuilder {
 }
 
 pub const ALICE: H160 = H160::repeat_byte(0xAA);
-//pub const BOB: H160 = H160::repeat_byte(0xBB);
 
 pub fn fill_relay_storage_roots<T: Config>() {
 	for i in 0..T::MaxStorageRoots::get() {

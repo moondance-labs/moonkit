@@ -54,11 +54,6 @@ pub mod pallet {
 		type WeightInfo: WeightInfo;
 	}
 
-	/// Ensures the mandatory inherent was included in the block
-	#[pallet::storage]
-	#[pallet::getter(fn inherent_included)]
-	pub(crate) type InherentIncluded<T: Config> = StorageValue<_, ()>;
-
 	/// Map of relay block number to relay storage root
 	#[pallet::storage]
 	pub type RelayStorageRoot<T: Config> =
