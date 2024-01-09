@@ -2,12 +2,13 @@
 name = "pallet-randomness"
 authors = { workspace = true }
 description = "Provides randomness"
-edition = "2018"
+edition = "2021"
 version = "0.1.0"
 
 [dependencies]
 frame-support = { workspace = true }
 frame-system = { workspace = true }
+environmental = { workspace = true }
 log = { workspace = true }
 nimbus-primitives = { workspace = true }
 parity-scale-codec = { workspace = true, features = [ "derive" ] }
