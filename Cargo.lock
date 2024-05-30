@@ -2880,9 +2880,8 @@ dependencies = [
 
 [[package]]
 name = "evm"
-version = "0.41.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "767f43e9630cc36cf8ff2777cbb0121b055f0d1fd6eaaa13b46a1808f0d0e7e9"
+version = "0.41.0"
+source = "git+https://github.com/moondance-labs/evm?branch=agustin-contract-deploy-filter#6acf4c683ba7fdd1ffdf6c31221fdc8d88227177"
 dependencies = [
  "auto_impl",
  "environmental",
@@ -2902,8 +2901,7 @@ dependencies = [
 [[package]]
 name = "evm-core"
 version = "0.41.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1da6cedc5cedb4208e59467106db0d1f50db01b920920589f8e672c02fdc04f"
+source = "git+https://github.com/moondance-labs/evm?branch=agustin-contract-deploy-filter#6acf4c683ba7fdd1ffdf6c31221fdc8d88227177"
 dependencies = [
  "parity-scale-codec",
  "primitive-types",
@@ -2914,8 +2912,7 @@ dependencies = [
 [[package]]
 name = "evm-gasometer"
 version = "0.41.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1dc0eb591abc5cd7b05bef6a036c2bb6c66ab6c5e0c5ce94bfe377ab670b1fd7"
+source = "git+https://github.com/moondance-labs/evm?branch=agustin-contract-deploy-filter#6acf4c683ba7fdd1ffdf6c31221fdc8d88227177"
 dependencies = [
  "environmental",
  "evm-core",
@@ -2926,8 +2923,7 @@ dependencies = [
 [[package]]
 name = "evm-runtime"
 version = "0.41.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "84bbe09b64ae13a29514048c1bb6fda6374ac0b4f6a1f15a443348ab88ef42cd"
+source = "git+https://github.com/moondance-labs/evm?branch=agustin-contract-deploy-filter#6acf4c683ba7fdd1ffdf6c31221fdc8d88227177"
 dependencies = [
  "auto_impl",
  "environmental",
@@ -3183,7 +3179,7 @@ dependencies = [
 [[package]]
 name = "fp-account"
 version = "1.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0#61194b8875dc5765ebda26d7482db1567e60cd8a"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0-contract-origin#73e739d1aa0982fcb6341f80623f0b625ddacf36"
 dependencies = [
  "hex",
  "impl-serde",
@@ -3201,7 +3197,7 @@ dependencies = [
 [[package]]
 name = "fp-evm"
 version = "3.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0#61194b8875dc5765ebda26d7482db1567e60cd8a"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0-contract-origin#73e739d1aa0982fcb6341f80623f0b625ddacf36"
 dependencies = [
  "evm",
  "frame-support",
@@ -6876,7 +6872,7 @@ dependencies = [
 [[package]]
 name = "pallet-evm"
 version = "6.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0#61194b8875dc5765ebda26d7482db1567e60cd8a"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0-contract-origin#73e739d1aa0982fcb6341f80623f0b625ddacf36"
 dependencies = [
  "environmental",
  "evm",
@@ -9518,7 +9514,7 @@ checksum = "5b40af805b3121feab8a3c29f04d8ad262fa8e0561883e7653e024ae4479e6de"
 [[package]]
 name = "precompile-utils"
 version = "0.1.0"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0#61194b8875dc5765ebda26d7482db1567e60cd8a"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0-contract-origin#73e739d1aa0982fcb6341f80623f0b625ddacf36"
 dependencies = [
  "derive_more",
  "environmental",
@@ -9547,7 +9543,7 @@ dependencies = [
 [[package]]
 name = "precompile-utils-macro"
 version = "0.1.0"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0#61194b8875dc5765ebda26d7482db1567e60cd8a"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-v1.11.0-contract-origin#73e739d1aa0982fcb6341f80623f0b625ddacf36"
 dependencies = [
  "case",
  "num_enum",
