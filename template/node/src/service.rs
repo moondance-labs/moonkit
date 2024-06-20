@@ -78,7 +78,10 @@ pub fn new_partial(
 		ParachainBackend,
 		sc_consensus::LongestChain<ParachainBackend, Block>,
 		sc_consensus::DefaultImportQueue<Block>,
-		sc_transaction_pool::FullPool<Block, ParachainClient>,
+		sc_transaction_pool::BasicPool<
+			sc_transaction_pool::FullChainApi<ParachainClient, Block>,
+			Block,
+		>,
 		(
 			ParachainBlockImport,
 			Option<Telemetry>,
@@ -136,7 +139,7 @@ pub fn new_partial(
 	let select_chain = sc_consensus::LongestChain::new(backend.clone());
 
 	let transaction_pool = sc_transaction_pool::BasicPool::new_full(
-		config.transaction_pool.clone(),
+		Default::default(),
 		config.role.is_authority().into(),
 		config.prometheus_registry(),
 		task_manager.spawn_essential_handle(),
@@ -352,7 +355,12 @@ fn start_consensus(
 	telemetry: Option<TelemetryHandle>,
 	task_manager: &TaskManager,
 	relay_chain_interface: Arc<dyn RelayChainInterface>,
-	transaction_pool: Arc<sc_transaction_pool::FullPool<Block, ParachainClient>>,
+	transaction_pool: Arc<
+		sc_transaction_pool::BasicPool<
+			sc_transaction_pool::FullChainApi<ParachainClient, Block>,
+			Block,
+		>,
+	>,
 	keystore: KeystorePtr,
 	para_id: ParaId,
 	collator_key: CollatorPair,
