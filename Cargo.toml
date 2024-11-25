@@ -206,9 +206,9 @@ westend-runtime = { git = "https://github.com/moondance-labs/polkadot-sdk", bran
 xcm-simulator = { git = "https://github.com/moondance-labs/polkadot-sdk", branch = "tanssi-polkadot-stable2409" }
 
 # Frontier (wasm)
-fp-evm = { git = "https://github.com/moondance-labs/frontier", branch = "tanssi-polkadot-stable2409", default-features = false }
-pallet-evm = { git = "https://github.com/moondance-labs/frontier", branch = "tanssi-polkadot-stable2409", default-features = false }
-precompile-utils = { git = "https://github.com/moondance-labs/frontier", branch = "tanssi-polkadot-stable2409", default-features = false }
+fp-evm = { git = "https://github.com/moondance-labs/frontier", branch = "tanssi-polkadot-stable2409-tx-pool", default-features = false }
+pallet-evm = { git = "https://github.com/moondance-labs/frontier", branch = "tanssi-polkadot-stable2409-tx-pool", default-features = false }
+precompile-utils = { git = "https://github.com/moondance-labs/frontier", branch = "tanssi-polkadot-stable2409-tx-pool", default-features = false }
 
 # EVM
 evm = { git = "https://github.com/moondance-labs/evm", branch = "release-v041", default-features = false }
