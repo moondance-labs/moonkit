@@ -1,18 +1,18 @@
 // Copyright Moonsong Labs
-// This file is part of Moonbeam.
+// This file is part of Moonkit.
 
-// Moonbeam is free software: you can redistribute it and/or modify
+// Moonkit is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 
-// Moonbeam is distributed in the hope that it will be useful,
+// Moonkit is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with Moonbeam.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moonkit.  If not, see <http://www.gnu.org/licenses/>.
 
 #![cfg(feature = "runtime-benchmarks")]
 
@@ -34,10 +34,11 @@ benchmarks! {
 mod tests {
 	use crate::tests::Test;
 	use sp_io::TestExternalities;
+	use sp_runtime::BuildStorage;
 
 	pub fn new_test_ext() -> TestExternalities {
-		let t = frame_system::GenesisConfig::default()
-			.build_storage::<Test>()
+		let t = frame_system::GenesisConfig::<Test>::default()
+			.build_storage()
 			.unwrap();
 		TestExternalities::new(t)
 	}

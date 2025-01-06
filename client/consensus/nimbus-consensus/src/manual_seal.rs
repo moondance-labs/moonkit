@@ -22,12 +22,15 @@ use nimbus_primitives::{
 };
 use sc_consensus::BlockImportParams;
 use sc_consensus_manual_seal::{ConsensusDataProvider, Error};
-use sp_api::{BlockT, HeaderT, ProvideRuntimeApi, TransactionFor};
+use sp_api::ProvideRuntimeApi;
 use sp_application_crypto::ByteArray;
 use sp_core::sr25519;
 use sp_inherents::InherentData;
 use sp_keystore::KeystorePtr;
-use sp_runtime::{Digest, DigestItem};
+use sp_runtime::{
+	traits::{Block as BlockT, Header as HeaderT},
+	Digest, DigestItem,
+};
 use std::{marker::PhantomData, sync::Arc};
 
 /// Provides nimbus-compatible pre-runtime digests for use with manual seal consensus
@@ -52,7 +55,6 @@ where
 	DP: DigestsProvider<NimbusId, <B as BlockT>::Hash> + Send + Sync,
 	P: Send + Sync,
 {
-	type Transaction = TransactionFor<C, B>;
 	type Proof = P;
 
 	fn create_digest(&self, parent: &B::Header, inherents: &InherentData) -> Result<Digest, Error> {
@@ -66,12 +68,12 @@ where
 
 		// Fetch first eligible key from keystore
 		let maybe_key = crate::first_eligible_key::<B, C>(
-			self.client.clone(),
+			&self.client,
 			&*self.keystore,
 			parent,
 			// For now we author all blocks in slot zero, which is consistent with  how we are
 			// mocking the relay chain height which the runtime uses for slot beacon.
-			// This should improve. See https://github.com/PureStake/nimbus/issues/3
+			// This should improve. See https://github.com/Moonsong Labs/nimbus/issues/3
 			slot_number,
 		);
 
@@ -98,7 +100,7 @@ where
 	fn append_block_import(
 		&self,
 		_parent: &B::Header,
-		params: &mut BlockImportParams<B, Self::Transaction>,
+		params: &mut BlockImportParams<B>,
 		_inherents: &InherentData,
 		_proof: Self::Proof,
 	) -> Result<(), Error> {
@@ -122,7 +124,7 @@ where
 		let nimbus_public = NimbusId::from_slice(&claimed_author)
 			.map_err(|_| Error::StringError(String::from("invalid nimbus id (wrong length)")))?;
 
-		let sig_digest = crate::seal_header::<B>(
+		let sig_digest = crate::collators::seal_header::<B>(
 			&params.header,
 			&*self.keystore,
 			&nimbus_public.to_raw_vec(),

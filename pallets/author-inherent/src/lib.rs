@@ -28,15 +28,16 @@ use parity_scale_codec::{Decode, Encode, FullCodec};
 use sp_inherents::{InherentIdentifier, IsFatalError};
 use sp_runtime::{ConsensusEngineId, RuntimeString};
 
-mod exec;
+pub use crate::weights::WeightInfo;
 pub use exec::BlockExecutor;
-
 pub use pallet::*;
 
 #[cfg(any(test, feature = "runtime-benchmarks"))]
 mod benchmarks;
 
 pub mod weights;
+
+mod exec;
 
 #[cfg(test)]
 mod mock;
@@ -46,7 +47,6 @@ mod tests;
 #[frame_support::pallet]
 pub mod pallet {
 	use super::*;
-	use crate::weights::WeightInfo;
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 
@@ -95,14 +95,13 @@ pub mod pallet {
 	#[pallet::storage]
 	pub type Author<T: Config> = StorageValue<_, T::AuthorId, OptionQuery>;
 
-	/// The highest slot that has been seen in the history of this chain.
-	/// This is a strictly-increasing value.
+	/// Check if the inherent was included
 	#[pallet::storage]
-	pub type HighestSlotSeen<T: Config> = StorageValue<_, u32, ValueQuery>;
+	pub type InherentIncluded<T: Config> = StorageValue<_, bool, ValueQuery>;
 
 	#[pallet::hooks]
 	impl<T: Config> Hooks<BlockNumberFor<T>> for Pallet<T> {
-		fn on_initialize(_: T::BlockNumber) -> Weight {
+		fn on_initialize(_: BlockNumberFor<T>) -> Weight {
 			// Now extract the author from the digest
 			let digest = <frame_system::Pallet<T>>::digest();
 			let pre_runtime_digests = digest.logs.iter().filter_map(|d| d.as_pre_runtime());
@@ -111,7 +110,18 @@ pub mod pallet {
 				<Author<T>>::put(&author);
 			}
 
-			T::DbWeight::get().writes(1)
+			// on_initialize: 1 write
+			// on_finalize: 1 read + 1 write
+			T::DbWeight::get().reads_writes(1, 2)
+		}
+		fn on_finalize(_: BlockNumberFor<T>) {
+			// According to parity, the only way to ensure that a mandatory inherent is included
+			// is by checking on block finalization that the inherent set a particular storage item:
+			// https://github.com/paritytech/polkadot-sdk/issues/2841#issuecomment-1876040854
+			assert!(
+				InherentIncluded::<T>::take(),
+				"Block invalid, missing inherent `kick_off_authorship_validation`"
+			);
 		}
 	}
 
@@ -127,20 +137,15 @@ pub mod pallet {
 			ensure_none(origin)?;
 
 			// First check that the slot number is valid (greater than the previous highest)
-			let slot = T::SlotBeacon::slot();
-			assert!(
-				slot > HighestSlotSeen::<T>::get(),
-				"Block invalid; Supplied slot number is not high enough"
-			);
+			let new_slot = T::SlotBeacon::slot();
 
 			// Now check that the author is valid in this slot
 			assert!(
-				T::CanAuthor::can_author(&Self::get(), &slot),
+				T::CanAuthor::can_author(&Self::get(), &new_slot),
 				"Block invalid, supplied author is not eligible."
 			);
 
-			// Once that is validated, update the stored slot number
-			HighestSlotSeen::<T>::put(slot);
+			InherentIncluded::<T>::put(true);
 
 			Ok(Pays::No.into())
 		}

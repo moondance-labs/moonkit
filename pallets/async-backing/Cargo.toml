@@ -1,0 +1,42 @@
+[package]
+name = "pallet-async-backing"
+authors = [ "Moonsong Labs" ]
+description = "Nimbus consensus extension pallet for asynchronous backing"
+edition = "2021"
+version = "0.9.0"
+
+[dependencies]
+cumulus-pallet-parachain-system = { workspace = true }
+cumulus-primitives-core = { workspace = true }
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+log = { workspace = true }
+nimbus-primitives = { workspace = true }
+pallet-timestamp = { workspace = true }
+parity-scale-codec = { workspace = true }
+scale-info = { workspace = true }
+sp-consensus-slots = { workspace = true }
+sp-core = { workspace = true }
+sp-runtime = { workspace = true }
+sp-std = { workspace = true }
+
+[dev-dependencies]
+sp-io = { workspace = true }
+
+[features]
+default = [ "std" ]
+std = [
+	"cumulus-pallet-parachain-system/std",
+	"cumulus-primitives-core/std",
+	"frame-support/std",
+	"frame-system/std",
+	"nimbus-primitives/std",
+    "pallet-timestamp/std",
+	"parity-scale-codec/std",
+	"scale-info/std",
+	"sp-consensus-slots/std",
+	"sp-core/std",
+	"sp-runtime/std",
+	"sp-std/std",
+]
+try-runtime = [ "frame-support/try-runtime", "nimbus-primitives/try-runtime" ]

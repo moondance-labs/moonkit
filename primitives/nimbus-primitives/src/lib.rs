@@ -26,7 +26,7 @@ use sp_runtime::generic::DigestItem;
 use sp_runtime::traits::BlockNumberProvider;
 use sp_runtime::ConsensusEngineId;
 #[cfg(feature = "runtime-benchmarks")]
-use sp_std::vec::{self, Vec};
+use sp_std::vec::Vec;
 
 pub mod digests;
 mod inherents;
@@ -91,17 +91,6 @@ impl<T: BlockNumberProvider<BlockNumber = u32>> SlotBeacon for T {
 	}
 }
 
-/// PLANNED: A SlotBeacon that starts a new slot based on the timestamp. Behaviorally, this is
-/// similar to what aura, babe and company do. Implementation-wise it is different because it
-/// depends on the timestamp pallet for its notion of time.
-pub struct IntervalBeacon;
-
-impl SlotBeacon for IntervalBeacon {
-	fn slot() -> u32 {
-		todo!()
-	}
-}
-
 /// Trait to determine whether this author is eligible to author in this slot.
 /// This is the primary trait your nimbus filter needs to implement.
 ///
@@ -114,14 +103,14 @@ impl SlotBeacon for IntervalBeacon {
 pub trait CanAuthor<AuthorId> {
 	#[cfg(feature = "try-runtime")]
 	// With `try-runtime` the local author should always be able to author a block.
-	fn can_author(author: &AuthorId, slot: &u32) -> bool {
+	fn can_author(_author: &AuthorId, _slot: &u32) -> bool {
 		true
 	}
 	#[cfg(not(feature = "try-runtime"))]
 	fn can_author(author: &AuthorId, slot: &u32) -> bool;
 	#[cfg(feature = "runtime-benchmarks")]
 	fn get_authors(_slot: &u32) -> Vec<AuthorId> {
-		vec![]
+		Vec::new()
 	}
 	#[cfg(feature = "runtime-benchmarks")]
 	fn set_eligible_author(_slot: &u32) {}
