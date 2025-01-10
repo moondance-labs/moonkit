@@ -161,7 +161,7 @@ pub mod pallet {
 			// Return Ok(Some(_)) unconditionally because this inherent is required in every block
 			// If it is not found, throw an AuthorInherentRequired error.
 			Ok(Some(InherentError::Other(
-				sp_runtime::RuntimeString::Borrowed(
+				String::from(
 					"Inherent required to manually initiate author validation",
 				),
 			)))

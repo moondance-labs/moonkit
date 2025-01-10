@@ -278,7 +278,7 @@ pub mod pallet {
 			// Return Ok(Some(_)) unconditionally because this inherent is required in every block
 			// If it is not found, throw a VrfInherentRequired error.
 			Ok(Some(InherentError::Other(
-				sp_runtime::RuntimeString::Borrowed(
+				String::from(
 					"Inherent required to set babe randomness results",
 				),
 			)))
