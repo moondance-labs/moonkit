@@ -3657,7 +3657,7 @@ dependencies = [
 [[package]]
 name = "fp-account"
 version = "1.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#c819c32b46faf1bb078d26e647427dd03e04b855"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
 dependencies = [
  "hex",
  "impl-serde 0.5.0",
@@ -3676,7 +3676,7 @@ dependencies = [
 [[package]]
 name = "fp-evm"
 version = "3.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#c819c32b46faf1bb078d26e647427dd03e04b855"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
 dependencies = [
  "evm",
  "frame-support",
@@ -7341,7 +7341,7 @@ version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "af1844ef2428cc3e1cb900be36181049ef3d3193c63e43026cfe202983b27a56"
 dependencies = [
- "proc-macro-crate 1.1.3",
+ "proc-macro-crate 3.2.0",
  "proc-macro2",
  "quote",
  "syn 2.0.96",
@@ -7969,7 +7969,7 @@ dependencies = [
 [[package]]
 name = "pallet-evm"
 version = "6.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#c819c32b46faf1bb078d26e647427dd03e04b855"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
 dependencies = [
  "environmental",
  "evm",
@@ -10668,7 +10668,7 @@ dependencies = [
 [[package]]
 name = "precompile-utils"
 version = "0.1.0"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#c819c32b46faf1bb078d26e647427dd03e04b855"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
 dependencies = [
  "derive_more 0.99.18",
  "environmental",
@@ -10697,7 +10697,7 @@ dependencies = [
 [[package]]
 name = "precompile-utils-macro"
 version = "0.1.0"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#c819c32b46faf1bb078d26e647427dd03e04b855"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
 dependencies = [
  "case",
  "num_enum",
@@ -14385,7 +14385,7 @@ dependencies = [
 [[package]]
 name = "sp-crypto-ec-utils"
 version = "0.10.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "ark-bls12-377",
  "ark-bls12-377-ext",
@@ -14461,7 +14461,7 @@ dependencies = [
 [[package]]
 name = "sp-debug-derive"
 version = "14.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -14481,7 +14481,7 @@ dependencies = [
 [[package]]
 name = "sp-externalities"
 version = "0.25.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "environmental",
  "parity-scale-codec",
@@ -14700,7 +14700,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface"
 version = "24.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "bytes",
  "impl-trait-for-tuples",
@@ -14732,7 +14732,7 @@ dependencies = [
 [[package]]
 name = "sp-runtime-interface-proc-macro"
 version = "17.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "Inflector",
  "expander",
@@ -14821,7 +14821,7 @@ source = "git+https://github.com/moondance-labs/polkadot-sdk?branch=tanssi-polka
 [[package]]
 name = "sp-std"
 version = "14.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 
 [[package]]
 name = "sp-storage"
@@ -14838,7 +14838,7 @@ dependencies = [
 [[package]]
 name = "sp-storage"
 version = "19.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "impl-serde 0.5.0",
  "parity-scale-codec",
@@ -14873,7 +14873,7 @@ dependencies = [
 [[package]]
 name = "sp-tracing"
 version = "16.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "parity-scale-codec",
  "tracing",
@@ -14970,7 +14970,7 @@ dependencies = [
 [[package]]
 name = "sp-wasm-interface"
 version = "20.0.0"
-source = "git+https://github.com/paritytech/polkadot-sdk#e051f3edd3d6a0699a9261c8f8985d2e8e95c276"
+source = "git+https://github.com/paritytech/polkadot-sdk#d822e07d51dda41982291dc6582a8c4a34821e94"
 dependencies = [
  "anyhow",
  "impl-trait-for-tuples",
