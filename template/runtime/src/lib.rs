@@ -10,11 +10,10 @@ use smallvec::smallvec;
 use sp_api::impl_runtime_apis;
 use sp_core::{crypto::KeyTypeId, ConstU32, OpaqueMetadata};
 use sp_runtime::{
-    Cow,
 	generic, impl_opaque_keys,
 	traits::{AccountIdLookup, BlakeTwo256, Block as BlockT, IdentifyAccount, Verify},
 	transaction_validity::{TransactionSource, TransactionValidity},
-	ApplyExtrinsicResult, MultiSignature,
+	ApplyExtrinsicResult, Cow, MultiSignature,
 };
 
 pub use nimbus_primitives::NimbusId;
@@ -348,7 +347,7 @@ impl frame_system::Config for Runtime {
 	type PreInherents = ();
 	type PostInherents = ();
 	type PostTransactions = ();
-        type ExtensionsWeightInfo = ();
+    type ExtensionsWeightInfo = ();
 }
 
 parameter_types! {
@@ -385,7 +384,7 @@ impl pallet_balances::Config for Runtime {
 	type RuntimeFreezeReason = ();
 	type FreezeIdentifier = ();
 	type MaxFreezes = ConstU32<0>;
-        type DoneSlashHandler = ();
+    type DoneSlashHandler = ();
 }
 
 parameter_types! {
