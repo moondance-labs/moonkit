@@ -22,11 +22,13 @@ use cumulus_client_parachain_inherent::{MockValidationDataInherentDataProvider, 
 use cumulus_client_service::{
 	prepare_node_config, start_relay_chain_tasks, DARecoveryProfile, StartRelayChainTasksParams,
 };
+use cumulus_primitives_core::CollectCollationInfo;
 use cumulus_primitives_core::ParaId;
 use cumulus_relay_chain_inprocess_interface::build_inprocess_relay_chain;
 use cumulus_relay_chain_interface::{OverseerHandle, RelayChainInterface, RelayChainResult};
 use cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node_with_rpc;
 
+use polkadot_primitives::UpgradeGoAhead;
 use polkadot_service::CollatorPair;
 
 // Substrate Imports
@@ -188,8 +190,9 @@ async fn build_relay_chain_interface(
 	if let cumulus_client_cli::RelayChainMode::ExternalRpc(rpc_target_urls) =
 		collator_options.relay_chain_mode
 	{
-		build_minimal_relay_chain_node_with_rpc(polkadot_config, task_manager, rpc_target_urls)
-			.await
+		build_minimal_relay_chain_node_with_rpc(polkadot_config, task_manager, rpc_target_urls,
+		)
+		.await
 	} else {
 		build_inprocess_relay_chain(
 			polkadot_config,

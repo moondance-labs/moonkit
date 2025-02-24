@@ -13,7 +13,7 @@ use sp_runtime::{
 	create_runtime_str, generic, impl_opaque_keys,
 	traits::{AccountIdLookup, BlakeTwo256, Block as BlockT, IdentifyAccount, Verify},
 	transaction_validity::{TransactionSource, TransactionValidity},
-	ApplyExtrinsicResult, MultiSignature,
+	ApplyExtrinsicResult, Cow, MultiSignature,
 };
 
 pub use nimbus_primitives::NimbusId;
@@ -347,6 +347,7 @@ impl frame_system::Config for Runtime {
 	type PreInherents = ();
 	type PostInherents = ();
 	type PostTransactions = ();
+    type ExtensionsWeightInfo = ();
 }
 
 parameter_types! {
