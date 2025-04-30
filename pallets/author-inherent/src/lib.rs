@@ -22,6 +22,7 @@
 
 extern crate alloc;
 
+use alloc::string::String;
 use frame_support::traits::{FindAuthor, Get};
 use nimbus_primitives::{
 	AccountLookup, CanAuthor, NimbusId, SlotBeacon, INHERENT_IDENTIFIER, NIMBUS_ENGINE_ID,
@@ -29,7 +30,6 @@ use nimbus_primitives::{
 use parity_scale_codec::{Decode, Encode, FullCodec};
 use sp_inherents::{InherentIdentifier, IsFatalError};
 use sp_runtime::{ConsensusEngineId, RuntimeString};
-use alloc::string::String;
 
 pub use crate::weights::WeightInfo;
 pub use exec::BlockExecutor;
