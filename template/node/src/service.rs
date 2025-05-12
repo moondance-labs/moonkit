@@ -18,7 +18,6 @@ use cumulus_client_consensus_common::ParachainBlockImport as TParachainBlockImpo
 use cumulus_client_consensus_proposer::Proposer;
 use cumulus_client_network::RequireSecondedInBlockAnnounce;
 use cumulus_client_parachain_inherent::{MockValidationDataInherentDataProvider, MockXcmConfig};
-use cumulus_primitives_core::CollectCollationInfo;
 #[allow(deprecated)]
 use cumulus_client_service::{
 	prepare_node_config, start_relay_chain_tasks, DARecoveryProfile, StartRelayChainTasksParams,
@@ -29,7 +28,6 @@ use cumulus_relay_chain_inprocess_interface::build_inprocess_relay_chain;
 use cumulus_relay_chain_interface::{OverseerHandle, RelayChainInterface, RelayChainResult};
 use cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node_with_rpc;
 
-use polkadot_primitives::UpgradeGoAhead;
 use polkadot_service::CollatorPair;
 use polkadot_primitives::UpgradeGoAhead;
 
@@ -164,6 +162,7 @@ pub fn new_partial(
 		&task_manager.spawn_essential_handle(),
 		config.prometheus_registry().clone(),
 		false,
+		true,
 	)?;
 
 	Ok(PartialComponents {
