@@ -28,8 +28,8 @@ use cumulus_relay_chain_inprocess_interface::build_inprocess_relay_chain;
 use cumulus_relay_chain_interface::{OverseerHandle, RelayChainInterface, RelayChainResult};
 use cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node_with_rpc;
 
-use polkadot_service::CollatorPair;
 use polkadot_primitives::UpgradeGoAhead;
+use polkadot_service::CollatorPair;
 
 // Substrate Imports
 use futures::FutureExt;
@@ -140,14 +140,14 @@ pub fn new_partial(
 	// And sovereign nodes, so we create it anyway.
 	let select_chain = sc_consensus::LongestChain::new(backend.clone());
 
-        let transaction_pool = sc_transaction_pool::Builder::new(
-            task_manager.spawn_essential_handle(),
-            client.clone(),
-            config.role.is_authority().into(),
-        )
-        .with_options(config.transaction_pool.clone())
-        .with_prometheus(config.prometheus_registry())
-        .build();
+	let transaction_pool = sc_transaction_pool::Builder::new(
+		task_manager.spawn_essential_handle(),
+		client.clone(),
+		config.role.is_authority().into(),
+	)
+	.with_options(config.transaction_pool.clone())
+	.with_prometheus(config.prometheus_registry())
+	.build();
 
 	let block_import = ParachainBlockImport::new(client.clone(), backend.clone());
 
@@ -190,9 +190,11 @@ async fn build_relay_chain_interface(
 	if let cumulus_client_cli::RelayChainMode::ExternalRpc(rpc_target_urls) =
 		collator_options.relay_chain_mode
 	{
-		build_minimal_relay_chain_node_with_rpc(polkadot_config,
-                    parachain_config.prometheus_registry(),
-                    task_manager, rpc_target_urls,
+		build_minimal_relay_chain_node_with_rpc(
+			polkadot_config,
+			parachain_config.prometheus_registry(),
+			task_manager,
+			rpc_target_urls,
 		)
 		.await
 	} else {
@@ -560,21 +562,20 @@ where
 				let hrmp_xcm_receiver = hrmp_xcm_receiver.clone();
 
 				let client_for_xcm = client_set_aside_for_cidp.clone();
-                                let current_para_head = client_set_aside_for_cidp
-                                        .header(block)
-                                        .expect("Header lookup should succeed")
-                                        .expect("Header passed in as parent should be present in backend.");
-                                let should_send_go_ahead = match client_set_aside_for_cidp
-                                        .runtime_api()
-                                        .collect_collation_info(block, &current_para_head)
-                                {
-                                        Ok(info) => info.new_validation_code.is_some(),
-                                        Err(e) => {
-                                                log::error!("Failed to collect collation info: {:?}", e);
-                                                false
-                                        },
-                                };
-
+				let current_para_head = client_set_aside_for_cidp
+					.header(block)
+					.expect("Header lookup should succeed")
+					.expect("Header passed in as parent should be present in backend.");
+				let should_send_go_ahead = match client_set_aside_for_cidp
+					.runtime_api()
+					.collect_collation_info(block, &current_para_head)
+				{
+					Ok(info) => info.new_validation_code.is_some(),
+					Err(e) => {
+						log::error!("Failed to collect collation info: {:?}", e);
+						false
+					}
+				};
 
 				async move {
 					let time = sp_timestamp::InherentDataProvider::from_system_time();
@@ -594,13 +595,12 @@ where
 						raw_downward_messages: downward_xcm_receiver.drain().collect(),
 						raw_horizontal_messages: hrmp_xcm_receiver.drain().collect(),
 						para_id: para_id.into(),
-                                                upgrade_go_ahead: should_send_go_ahead.then(|| {
-                                                        log::info!(
-                                                                "Detected pending validation code, sending go-ahead signal."
-                                                        );
-                                                        UpgradeGoAhead::GoAhead
-                                                }),
-
+						upgrade_go_ahead: should_send_go_ahead.then(|| {
+							log::info!(
+								"Detected pending validation code, sending go-ahead signal."
+							);
+							UpgradeGoAhead::GoAhead
+						}),
 					};
 
 					Ok((time, mocked_parachain))
