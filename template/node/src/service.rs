@@ -190,9 +190,8 @@ async fn build_relay_chain_interface(
 	if let cumulus_client_cli::RelayChainMode::ExternalRpc(rpc_target_urls) =
 		collator_options.relay_chain_mode
 	{
-		build_minimal_relay_chain_node_with_rpc(polkadot_config, task_manager, rpc_target_urls,
-		)
-		.await
+		build_minimal_relay_chain_node_with_rpc(polkadot_config, task_manager, rpc_target_urls)
+			.await
 	} else {
 		build_inprocess_relay_chain(
 			polkadot_config,
