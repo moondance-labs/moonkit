@@ -193,7 +193,7 @@ impl ExtBuilder {
 			pallet_evm::Pallet::<Runtime>::create_account(
 				Revert.into(),
 				hex_literal::hex!("1460006000fd").to_vec(),
-				None
+				None,
 			);
 		});
 		ext

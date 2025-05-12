@@ -1052,7 +1052,7 @@ fn batch_is_not_callable_by_dummy_code() {
 			pallet_evm::Pallet::<Runtime>::create_account(
 				alice_h160,
 				[0x60, 0x00, 0x60, 0x00, 0xfd].to_vec(),
-				None
+				None,
 			);
 
 			// succeeds if called by dummy code, see `evm_batch_recursion_under_limit`
