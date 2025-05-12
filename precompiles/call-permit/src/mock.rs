@@ -144,6 +144,9 @@ impl pallet_evm::Config for Runtime {
 	type GasLimitStorageGrowthRatio = ();
 	type Timestamp = Timestamp;
 	type WeightInfo = pallet_evm::weights::SubstrateWeight<Runtime>;
+	type CreateOrigin = ();
+	type CreateInnerOrigin = ();
+	type SuicideQuickClearLimit = ();
 }
 
 parameter_types! {
@@ -187,9 +190,10 @@ impl ExtBuilder {
 		let mut ext = sp_io::TestExternalities::new(t);
 		ext.execute_with(|| {
 			System::set_block_number(1);
-			pallet_evm::Pallet::<Runtime>::create_account(
+			let _ = pallet_evm::Pallet::<Runtime>::create_account(
 				Revert.into(),
 				hex_literal::hex!("1460006000fd").to_vec(),
+				None,
 			);
 		});
 		ext
