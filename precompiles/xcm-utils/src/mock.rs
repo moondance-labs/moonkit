@@ -278,6 +278,9 @@ impl pallet_evm::Config for Runtime {
 	type GasLimitStorageGrowthRatio = ();
 	type Timestamp = Timestamp;
 	type WeightInfo = pallet_evm::weights::SubstrateWeight<Runtime>;
+	type CreateOrigin = ();
+	type CreateInnerOrigin = ();
+	type SuicideQuickClearLimit = ();
 }
 
 parameter_types! {

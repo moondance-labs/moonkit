@@ -143,6 +143,9 @@ impl pallet_evm::Config for Runtime {
 	type GasLimitStorageGrowthRatio = ();
 	type Timestamp = Timestamp;
 	type WeightInfo = pallet_evm::weights::SubstrateWeight<Runtime>;
+	type CreateOrigin = ();
+	type CreateInnerOrigin = ();
+	type SuicideQuickClearLimit = ();
 }
 
 // Configure a mock runtime to test the pallet.
