@@ -2848,6 +2848,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.96",
+ "unicode-xid",
 ]
 
 [[package]]
@@ -3657,7 +3658,7 @@ dependencies = [
 [[package]]
 name = "fp-account"
 version = "1.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412-validate-max-blocks#7bd21be7d65e6c248ec532f724c02943e58c79a3"
 dependencies = [
  "hex",
  "impl-serde 0.5.0",
@@ -3676,8 +3677,9 @@ dependencies = [
 [[package]]
 name = "fp-evm"
 version = "3.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412-validate-max-blocks#7bd21be7d65e6c248ec532f724c02943e58c79a3"
 dependencies = [
+ "environmental",
  "evm",
  "frame-support",
  "num_enum",
@@ -7969,7 +7971,7 @@ dependencies = [
 [[package]]
 name = "pallet-evm"
 version = "6.0.0-dev"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412-validate-max-blocks#7bd21be7d65e6c248ec532f724c02943e58c79a3"
 dependencies = [
  "environmental",
  "evm",
@@ -10668,9 +10670,9 @@ dependencies = [
 [[package]]
 name = "precompile-utils"
 version = "0.1.0"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412-validate-max-blocks#7bd21be7d65e6c248ec532f724c02943e58c79a3"
 dependencies = [
- "derive_more 0.99.18",
+ "derive_more 1.0.0",
  "environmental",
  "evm",
  "fp-evm",
@@ -10697,15 +10699,14 @@ dependencies = [
 [[package]]
 name = "precompile-utils-macro"
 version = "0.1.0"
-source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412#6be9b76662229571f9475bc22364064457aa71da"
+source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2412-validate-max-blocks#7bd21be7d65e6c248ec532f724c02943e58c79a3"
 dependencies = [
  "case",
  "num_enum",
- "prettyplease",
  "proc-macro2",
  "quote",
  "sp-crypto-hashing 0.1.0 (git+https://github.com/moondance-labs/polkadot-sdk?branch=tanssi-polkadot-stable2412)",
- "syn 1.0.109",
+ "syn 2.0.96",
 ]
 
 [[package]]
@@ -13740,9 +13741,9 @@ dependencies = [
 
 [[package]]
 name = "similar-asserts"
-version = "1.6.0"
+version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cfe85670573cd6f0fa97940f26e7e6601213c3b0555246c24234131f88c5709e"
+checksum = "b5b441962c817e33508847a22bd82f03a30cff43642dc2fae8b050566121eb9a"
 dependencies = [
  "console",
  "similar",
