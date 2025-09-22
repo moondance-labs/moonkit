@@ -214,7 +214,7 @@ pallet-evm = { git = "https://github.com/moondance-labs/frontier", branch = "tan
 precompile-utils = { git = "https://github.com/moondance-labs/frontier", branch = "tanssi-polkadot-stable2506", default-features = false }
 
 # EVM
-evm = { version = "0.43.4", default-features = false }
+evm = { git = "https://github.com/rust-ethereum/evm.git", branch = "v0.x", default-features = false }
 
 # Local (wasm)
 pallet-evm-precompile-balances-erc20 = { path = "precompiles/balances-erc20", default-features = false }
