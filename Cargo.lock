@@ -3354,15 +3354,33 @@ dependencies = [
  "auto_impl",
  "environmental",
  "ethereum",
- "evm-core",
- "evm-gasometer",
- "evm-runtime",
+ "evm-core 0.43.0 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
+ "evm-gasometer 0.43.0 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
+ "evm-runtime 0.43.0 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
  "log",
  "parity-scale-codec",
  "primitive-types 0.13.1",
  "rlp 0.6.1",
  "scale-info",
  "serde",
+ "sha3",
+]
+
+[[package]]
+name = "evm"
+version = "0.43.4"
+source = "git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013#e3f0e925390188e8d9396a7355fc43d63acbd013"
+dependencies = [
+ "auto_impl",
+ "ethereum",
+ "evm-core 0.43.0 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
+ "evm-gasometer 0.43.0 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
+ "evm-runtime 0.43.0 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
+ "log",
+ "parity-scale-codec",
+ "primitive-types 0.13.1",
+ "rlp 0.6.1",
+ "scale-info",
  "sha3",
 ]
 
@@ -3378,13 +3396,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "evm-core"
+version = "0.43.0"
+source = "git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013#e3f0e925390188e8d9396a7355fc43d63acbd013"
+dependencies = [
+ "parity-scale-codec",
+ "primitive-types 0.13.1",
+ "scale-info",
+]
+
+[[package]]
 name = "evm-gasometer"
 version = "0.43.0"
 source = "git+https://github.com/rust-ethereum/evm.git?branch=v0.x#6917b131d552559ee84b0b3ea5450d9890a7e9bd"
 dependencies = [
  "environmental",
- "evm-core",
- "evm-runtime",
+ "evm-core 0.43.0 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
+ "evm-runtime 0.43.0 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
+ "primitive-types 0.13.1",
+]
+
+[[package]]
+name = "evm-gasometer"
+version = "0.43.0"
+source = "git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013#e3f0e925390188e8d9396a7355fc43d63acbd013"
+dependencies = [
+ "evm-core 0.43.0 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
+ "evm-runtime 0.43.0 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
  "primitive-types 0.13.1",
 ]
 
@@ -3395,7 +3433,18 @@ source = "git+https://github.com/rust-ethereum/evm.git?branch=v0.x#6917b131d5525
 dependencies = [
  "auto_impl",
  "environmental",
- "evm-core",
+ "evm-core 0.43.0 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
+ "primitive-types 0.13.1",
+ "sha3",
+]
+
+[[package]]
+name = "evm-runtime"
+version = "0.43.0"
+source = "git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013#e3f0e925390188e8d9396a7355fc43d63acbd013"
+dependencies = [
+ "auto_impl",
+ "evm-core 0.43.0 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
  "primitive-types 0.13.1",
  "sha3",
 ]
@@ -3676,7 +3725,7 @@ version = "3.0.0-dev"
 source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-stable2506#d06492d238141d38fa601a4accf53937da7a52a8"
 dependencies = [
  "environmental",
- "evm",
+ "evm 0.43.4 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
  "frame-support",
  "num_enum",
  "parity-scale-codec",
@@ -7872,7 +7921,7 @@ dependencies = [
  "cumulus-primitives-storage-weight-reclaim",
  "environmental",
  "ethereum",
- "evm",
+ "evm 0.43.4 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
  "fp-account",
  "fp-evm",
  "frame-benchmarking",
@@ -7922,7 +7971,7 @@ name = "pallet-evm-precompile-batch"
 version = "0.1.0"
 dependencies = [
  "derive_more 0.99.20",
- "evm",
+ "evm 0.43.4 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
  "fp-evm",
  "frame-support",
  "frame-system",
@@ -7950,7 +7999,7 @@ name = "pallet-evm-precompile-call-permit"
 version = "0.1.0"
 dependencies = [
  "derive_more 0.99.20",
- "evm",
+ "evm 0.43.4 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
  "fp-evm",
  "frame-support",
  "frame-system",
@@ -7979,7 +8028,7 @@ name = "pallet-evm-precompile-proxy"
 version = "0.1.0"
 dependencies = [
  "derive_more 0.99.20",
- "evm",
+ "evm 0.43.4 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
  "fp-evm",
  "frame-support",
  "frame-system",
@@ -8007,7 +8056,7 @@ version = "0.1.0"
 dependencies = [
  "cumulus-primitives-core",
  "derive_more 0.99.20",
- "evm",
+ "evm 0.43.4 (git+https://github.com/rust-ethereum/evm.git?rev=e3f0e925390188e8d9396a7355fc43d63acbd013)",
  "fp-evm",
  "frame-support",
  "frame-system",
@@ -10713,7 +10762,7 @@ source = "git+https://github.com/moondance-labs/frontier?branch=tanssi-polkadot-
 dependencies = [
  "derive_more 1.0.0",
  "environmental",
- "evm",
+ "evm 0.43.4 (git+https://github.com/rust-ethereum/evm.git?branch=v0.x)",
  "fp-evm",
  "frame-support",
  "frame-system",
