@@ -186,6 +186,7 @@ pub mod pallet {
 
 		#[cfg(feature = "try-runtime")]
 		fn pre_upgrade() -> Result<Vec<u8>, sp_runtime::DispatchError> {
+			use alloc::format;
 			use sp_std::collections::btree_map::BTreeMap;
 			let mut state_map: BTreeMap<String, bool> = BTreeMap::new();
 			let mut migration_states_map: BTreeMap<String, Vec<u8>> = BTreeMap::new();
